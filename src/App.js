@@ -28,7 +28,18 @@ const App = () => {
     setHour(parseInt(value, 10));
   };
 
-  const renderSalaryCalculater = (type) => {
+  const validateInput = () => {
+    if (
+      (salaryType === "monthly" && !month) ||
+      (salaryType === "hourly" && !hour)
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const renderSalaryCalculator = (type) => {
     const hourlySalary = salaryType === "monthly" && !month ? "0" : month / 240;
     if (salaryType === "monthly") {
       return (
@@ -51,12 +62,7 @@ const App = () => {
   };
 
   const renderMinsSalary = () => {
-    if (
-      (salaryType === "monthly" && !month) ||
-      (salaryType === "hourly" && !hour)
-    ) {
-      return <div>0</div>;
-    }
+    if (!validateInput()) return <div>0</div>;
 
     if (salaryType === "monthly") {
       return <div>{month / 240 / 60}</div>;
@@ -66,12 +72,7 @@ const App = () => {
   };
 
   const renderSecondsSalary = () => {
-    if (
-      (salaryType === "monthly" && !month) ||
-      (salaryType === "hourly" && !hour)
-    ) {
-      return <div>0</div>;
-    }
+    if (!validateInput()) return <div>0</div>;
 
     if (salaryType === "monthly") {
       return <div>{month / 240 / 60 / 60}</div>;
@@ -81,12 +82,7 @@ const App = () => {
   };
 
   const renderStealMoney = () => {
-    if (
-      (salaryType === "monthly" && !month) ||
-      (salaryType === "hourly" && !hour)
-    ) {
-      return <div>0</div>;
-    }
+    if (!validateInput()) return <div>0</div>;
 
     if (salaryType === "monthly") {
       return <div>{((time * month) / 240 / 60 / 60).toFixed(2)}</div>;
@@ -101,7 +97,7 @@ const App = () => {
         <button onClick={() => handleSalaryType("monthly")}>月薪</button>
         <button onClick={() => handleSalaryType("hourly")}>時薪</button>
       </div>
-      {renderSalaryCalculater()}
+      {renderSalaryCalculator()}
       <br />
       <label>分薪</label>
       {renderMinsSalary()}
