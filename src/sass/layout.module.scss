@@ -1,0 +1,51 @@
+$Primary-main: #6a4f4b;
+$Primary-dark: #3e2723;
+$Primary-light: #1b0000;
+
+.salaryCalculator {
+  label {
+    color: $Primary-main;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    margin: 0;
+    color: $Primary-dark;
+  }
+
+  hr {
+    width: 15%;
+    margin: 24px;
+    color: #1b0000;
+  }
+}
+
+.salaryCalculator__transitTime,
+.salaryCalculator__stealMoney {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.salaryCalculator__transitTime {
+  h2 {
+    margin-bottom: 8px;
+  }
+}
+
+.salaryCalculator__stealMoney_num {
+  width: 35%;
+
+  div {
+    width: 100%;
+    text-align: left;
+  }
+
+  h2 {
+    width: 100%;
+    text-align: right;
+  }
+}
