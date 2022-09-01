@@ -1,23 +1,25 @@
-$Primary-main: #6a4f4b;
-$Primary-dark: #3e2723;
-$Primary-light: #1b0000;
+$Primary-main: #3e2723;
+$Primary-dark: #1b0000;
+$Primary-light: #6a4f4b;
 
 .salaryCalculator {
   label {
     color: $Primary-main;
     letter-spacing: 1px;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
   }
 
+  h1,
   h2 {
     margin: 0;
+  }
+
+  h1 {
     color: $Primary-dark;
   }
 
-  hr {
-    width: 15%;
-    margin: 24px;
-    color: #1b0000;
+  h2 {
+    color: $Primary-light;
   }
 }
 
@@ -31,21 +33,27 @@ $Primary-light: #1b0000;
 }
 
 .salaryCalculator__transitTime {
+  div {
+    min-width: 70px;
+    text-align: center;
+  }
+
   h2 {
     margin-bottom: 8px;
+  }
+
+  span {
+    font-weight: 300;
+    font-size: 14px;
   }
 }
 
 .salaryCalculator__stealMoney_num {
-  width: 35%;
+  text-align: center;
 
-  div {
-    width: 100%;
-    text-align: left;
-  }
-
-  h2 {
-    width: 100%;
-    text-align: right;
+  h1 {
+    letter-spacing: 1px;
+    margin-left: 8px;
+    min-width: 30px;
   }
 }

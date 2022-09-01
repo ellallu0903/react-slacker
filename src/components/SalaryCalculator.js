@@ -3,10 +3,11 @@ import { Box } from "@mui/system";
 import Grid from "@mui/system/Unstable_Grid";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import { Input, Display, theme } from "../components/salaryCalculator/Input";
+import { InputText, DisplayText } from "./common/Input";
+import { theme } from "../components/common/commonMuiTheme";
 import { ThemeProvider } from "@mui/material/styles";
 
-import classes from "../sass/layout.module.scss";
+import style from "../sass/salaryCalculator.module.scss";
 
 const SalaryCalculator = () => {
   const [salaryType, setSalaryType] = useState("monthly"); // monthly 月薪, hourly 時薪
@@ -14,19 +15,26 @@ const SalaryCalculator = () => {
   const [hour, setHour] = useState(150);
   const [startTime] = useState(Date.now());
   const [currentTime, setCurrentTime] = useState(Date.now());
-  const time = (currentTime - startTime) / 1000; // 取得共過了多少秒
-  const flexCenter = {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-  };
+  const [validateInput, setValidateInput] = useState(false);
+
+  const time = Math.round((currentTime - startTime) / 1000); // 取得共過了多少秒
 
   useEffect(() => {
     setInterval(() => {
       setCurrentTime(Date.now());
     }, 100);
   }, []);
+
+  useEffect(() => {
+    if (
+      (salaryType === "monthly" && !month) ||
+      (salaryType === "hourly" && !hour)
+    ) {
+      return setValidateInput(false);
+    } else {
+      return setValidateInput(true);
+    }
+  }, [salaryType, month, hour]);
 
   const handleSalaryType = (_, type) => {
     setSalaryType(type);
@@ -42,63 +50,54 @@ const SalaryCalculator = () => {
     setHour(parseInt(value, 10));
   };
 
-  const validateInput = () => {
-    if (
-      (salaryType === "monthly" && !month) ||
-      (salaryType === "hourly" && !hour)
-    ) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-
   const renderSalaryCalculator = (type) => {
     const hourlySalary =
       salaryType === "monthly" && !month ? "0" : (month / 240).toFixed(2);
 
     if (salaryType === "monthly") {
       return (
-        <div>
-          <Input label="月薪" value={month} onChange={handleMonth} />
+        <Grid>
+          <InputText label="月薪" value={month} onChange={handleMonth} />
           <br />
-          <Display label="時薪" value={hourlySalary} />
-        </div>
+          <DisplayText label="時薪" value={hourlySalary} />
+        </Grid>
       );
     } else {
       return (
-        <div>
-          <Input label="時薪" value={hour} onChange={handleHour} />
-        </div>
+        <Grid>
+          <InputText label="時薪" value={hour} onChange={handleHour} />
+        </Grid>
       );
     }
   };
 
   const renderMinsSalary = () => {
-    if (!validateInput()) return <div>0</div>;
-
     const salary =
       salaryType === "monthly"
         ? (month / 240 / 60).toFixed(2)
         : (hour / 60).toFixed(2);
 
-    return <Display label="分薪" value={salary} />;
+    return (
+      <Grid>
+        <DisplayText label="分薪" value={validateInput ? salary : 0} />
+      </Grid>
+    );
   };
 
   const renderSecondsSalary = () => {
-    if (!validateInput()) return <div>0</div>;
-
     const salary =
       salaryType === "monthly"
         ? (month / 240 / 60 / 60).toFixed(2)
         : (hour / 60 / 60).toFixed(2);
 
-    return <Display label="秒薪" value={salary} />;
+    return (
+      <Grid>
+        <DisplayText label="秒薪" value={validateInput ? salary : 0} />
+      </Grid>
+    );
   };
 
   const renderStealMoney = () => {
-    if (!validateInput()) return <div>0</div>;
-
     const salary =
       salaryType === "monthly"
         ? ((time * month) / 240 / 60 / 60).toFixed(2)
@@ -106,26 +105,35 @@ const SalaryCalculator = () => {
 
     return (
       <Grid
-        sx={{ flexCenter }}
-        className={classes.salaryCalculator__stealMoney_num}
+        container
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        className={style.salaryCalculator__stealMoney_num}
       >
         <div>NT$</div>
-        <h2>{salary}</h2>
+        <h1>{validateInput ? salary : 0}</h1>
       </Grid>
     );
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid
-        container
-        className={classes.salaryCalculator}
+      <Box
+        className={style.salaryCalculator}
         sx={{
-          ...flexCenter,
           height: "100%",
         }}
       >
-        <Grid sx={flexCenter}>
+        <Grid
+          container
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          sx={{
+            height: "100%",
+          }}
+        >
           <ToggleButtonGroup
             color="primary"
             value={salaryType}
@@ -141,30 +149,70 @@ const SalaryCalculator = () => {
               時薪
             </ToggleButton>
           </ToggleButtonGroup>
-          <Box
-            sx={{
-              ...flexCenter,
-              height: "340px",
-              justifyContent: "flex-start",
-            }}
+
+          <Grid
+            container
+            sx={{ height: { xs: "280px", sm: "340px" } }}
+            direction="column"
+            justifyContent="flex-start"
+            alignItems="center"
           >
             {renderSalaryCalculator()}
             {renderMinsSalary()}
             {renderSecondsSalary()}
-          </Box>
-          <Grid sx={{ ...flexCenter, width: "100%" }}>
-            <div className={classes.salaryCalculator__transitTime}>
+          </Grid>
+          <Grid
+            container
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            xs={8}
+            sm={5}
+            md={3}
+          >
+            <Grid
+              container
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+              className={style.salaryCalculator__transitTime}
+              xs={12}
+            >
               <label>經過時間</label>
-              <h2>{time.toFixed(1)}</h2>秒
-            </div>
-            <hr />
-            <div className={classes.salaryCalculator__stealMoney}>
+              <Grid
+                container
+                justifyContent="space-between"
+                alignItems="center"
+                xs={12}
+                sx={{ mb: 3 }}
+              >
+                <div>
+                  <h2>{Math.floor(time / 3600)}</h2>
+                  <span>HOURS</span>
+                </div>
+                <div>
+                  <h2>{Math.floor(Math.floor(time % 3600) / 60)}</h2>
+                  <span>MINUTES</span>
+                </div>
+                <div>
+                  <h2>{time % 60}</h2>
+                  <span>SECONDS</span>
+                </div>
+              </Grid>
+            </Grid>
+            <Grid
+              container
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+              className={style.salaryCalculator__stealMoney}
+            >
               <label>偷取薪水</label>
               {renderStealMoney()}
-            </div>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </Box>
     </ThemeProvider>
   );
 };

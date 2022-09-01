@@ -1,8 +1,8 @@
-import { styled, createTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 
-const InputText = styled(TextField)(() => ({
+const InputTextField = styled(TextField)(() => ({
   "& .MuiInputBase-input": {
     color: "#40241a",
   },
@@ -11,7 +11,7 @@ const InputText = styled(TextField)(() => ({
   },
 }));
 
-const DisplayText = styled(TextField)(() => ({
+const DisplayTextField = styled(TextField)(() => ({
   "& .Mui-disabled": {
     color: "#9c786c !important",
     "& .Mui-disabled": {
@@ -20,20 +20,9 @@ const DisplayText = styled(TextField)(() => ({
   },
 }));
 
-export const theme = createTheme({
-  palette: {
-    primary: {
-      light: "#6a4f4b",
-      main: "#3e2723",
-      dark: "#1b0000",
-      contrastText: "#fff",
-    },
-  },
-});
-
-export const Input = ({ label, value, onChange }) => {
+export const InputText = ({ label, value, onChange }) => {
   return (
-    <InputText
+    <InputTextField
       label={label}
       id="outlined-start-adornment"
       sx={{ m: 1, width: "25ch" }}
@@ -46,13 +35,13 @@ export const Input = ({ label, value, onChange }) => {
   );
 };
 
-export const Display = ({ label, value }) => {
+export const DisplayText = ({ label, value }) => {
   return (
-    <DisplayText
+    <DisplayTextField
       disabled
       label={label}
       id="standard-start-adornment"
-      sx={{ m: 1, mt: 3, width: "25ch" }}
+      sx={{ m: 1, mt: { xs: 1, sm: 3 }, width: "25ch" }}
       InputProps={{
         inputMode: "numeric",
         pattern: "[0-9]*",
