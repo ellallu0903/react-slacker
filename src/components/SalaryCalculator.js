@@ -4,8 +4,6 @@ import Grid from "@mui/system/Unstable_Grid";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { InputText, DisplayText } from "./common/Input";
-import { theme } from "../components/common/commonMuiTheme";
-import { ThemeProvider } from "@mui/material/styles";
 
 import style from "../sass/salaryCalculator.module.scss";
 
@@ -118,102 +116,100 @@ const SalaryCalculator = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Box
-        className={style.salaryCalculator}
+    <Box
+      className={style.salaryCalculator}
+      sx={{
+        height: "calc(100% - 36px)",
+      }}
+    >
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
         sx={{
           height: "100%",
         }}
       >
+        <ToggleButtonGroup
+          color="primary"
+          value={salaryType}
+          exclusive
+          onChange={handleSalaryType}
+          sx={{ mb: 3 }}
+          aria-label="text alignment"
+        >
+          <ToggleButton value="monthly" aria-label="left aligned">
+            月薪
+          </ToggleButton>
+          <ToggleButton value="hourly" aria-label="centered">
+            時薪
+          </ToggleButton>
+        </ToggleButtonGroup>
+
+        <Grid
+          container
+          sx={{ height: { xs: "280px", sm: "340px" } }}
+          direction="column"
+          justifyContent="flex-start"
+          alignItems="center"
+        >
+          {renderSalaryCalculator()}
+          {renderMinsSalary()}
+          {renderSecondsSalary()}
+        </Grid>
         <Grid
           container
           direction="column"
           justifyContent="center"
           alignItems="center"
-          sx={{
-            height: "100%",
-          }}
+          xs={8}
+          sm={5}
+          md={3}
         >
-          <ToggleButtonGroup
-            color="primary"
-            value={salaryType}
-            exclusive
-            onChange={handleSalaryType}
-            sx={{ mb: 3 }}
-            aria-label="text alignment"
-          >
-            <ToggleButton value="monthly" aria-label="left aligned">
-              月薪
-            </ToggleButton>
-            <ToggleButton value="hourly" aria-label="centered">
-              時薪
-            </ToggleButton>
-          </ToggleButtonGroup>
-
           <Grid
             container
-            sx={{ height: { xs: "280px", sm: "340px" } }}
             direction="column"
-            justifyContent="flex-start"
+            justifyContent="center"
             alignItems="center"
+            className={style.salaryCalculator__transitTime}
+            xs={12}
           >
-            {renderSalaryCalculator()}
-            {renderMinsSalary()}
-            {renderSecondsSalary()}
+            <label>經過時間</label>
+            <Grid
+              container
+              justifyContent="space-between"
+              alignItems="center"
+              xs={12}
+              sx={{ mb: 3 }}
+            >
+              <div>
+                <h2>{Math.floor(time / 3600)}</h2>
+                <span>HOURS</span>
+              </div>
+              <div>
+                <h2>{Math.floor(Math.floor(time % 3600) / 60)}</h2>
+                <span>MINUTES</span>
+              </div>
+              <div>
+                <h2>{time % 60}</h2>
+                <span>SECONDS</span>
+              </div>
+            </Grid>
           </Grid>
           <Grid
             container
             direction="column"
             justifyContent="center"
             alignItems="center"
-            xs={8}
-            sm={5}
-            md={3}
+            className={style.salaryCalculator__stealMoney}
           >
-            <Grid
-              container
-              direction="column"
-              justifyContent="center"
-              alignItems="center"
-              className={style.salaryCalculator__transitTime}
-              xs={12}
-            >
-              <label>經過時間</label>
-              <Grid
-                container
-                justifyContent="space-between"
-                alignItems="center"
-                xs={12}
-                sx={{ mb: 3 }}
-              >
-                <div>
-                  <h2>{Math.floor(time / 3600)}</h2>
-                  <span>HOURS</span>
-                </div>
-                <div>
-                  <h2>{Math.floor(Math.floor(time % 3600) / 60)}</h2>
-                  <span>MINUTES</span>
-                </div>
-                <div>
-                  <h2>{time % 60}</h2>
-                  <span>SECONDS</span>
-                </div>
-              </Grid>
-            </Grid>
-            <Grid
-              container
-              direction="column"
-              justifyContent="center"
-              alignItems="center"
-              className={style.salaryCalculator__stealMoney}
-            >
-              <label>偷取薪水</label>
-              {renderStealMoney()}
-            </Grid>
+            <label>偷取薪水</label>
+            {renderStealMoney()}
           </Grid>
         </Grid>
-      </Box>
-    </ThemeProvider>
+      </Grid>
+    </Box>
   );
 };
 
