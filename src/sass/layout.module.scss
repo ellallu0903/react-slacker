@@ -1,4 +1,5 @@
+@import "variable";
+
 .app {
-  width: 100%;
-  height: 100%;
+  background-color: rgba($Primary-light, 0.05);
 }
