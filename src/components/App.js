@@ -11,11 +11,7 @@ import style from "../sass/layout.module.scss";
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Box
-        sx={{ width: "100%", height: "100%" }}
-        // bgcolor={`rgba(${theme.palette.primary.light}, 0.3)`}
-        className={style.app}
-      >
+      <Box sx={{ width: "100%", height: "100%" }} className={style.app}>
         <Header />
         <Outlet />
         <Footer />

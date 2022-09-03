@@ -4,6 +4,9 @@ import Grid from "@mui/system/Unstable_Grid";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { InputText, DisplayText } from "./common/Input";
+import PaidIcon from "@mui/icons-material/Paid";
+import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
+import { theme } from "./common/commonMuiTheme";
 
 import style from "../sass/salaryCalculator.module.scss";
 
@@ -175,7 +178,15 @@ const SalaryCalculator = () => {
             className={style.salaryCalculator__transitTime}
             xs={12}
           >
-            <label>經過時間</label>
+            <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              sx={{ color: theme.palette.primary.main, mb: 1.5 }}
+            >
+              <AccessTimeFilledIcon sx={{ mr: 0.5 }} />
+              經過時間
+            </Grid>
             <Grid
               container
               justifyContent="space-between"
@@ -204,7 +215,15 @@ const SalaryCalculator = () => {
             alignItems="center"
             className={style.salaryCalculator__stealMoney}
           >
-            <label>偷取薪水</label>
+            <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              sx={{ color: theme.palette.primary.main, mb: 1.5 }}
+            >
+              <PaidIcon sx={{ mr: 0.5 }} />
+              偷取薪水
+            </Grid>
             {renderStealMoney()}
           </Grid>
         </Grid>
