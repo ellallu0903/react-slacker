@@ -53,6 +53,7 @@
 
 .nav__item_full {
   position: relative;
+  cursor: pointer;
 
   &:hover::before {
     transform: scaleX(1);

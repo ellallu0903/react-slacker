@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -20,8 +22,15 @@ export default function Header(props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
+  const navigate = useNavigate();
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const toAboutPage = () => {
+    navigate("/about");
+    handleDrawerToggle();
   };
 
   const drawer = (
@@ -69,8 +78,7 @@ export default function Header(props) {
         className={style.nav__item_full}
         variant="h4"
         noWrap
-        component="a"
-        href="/about"
+        onClick={toAboutPage}
         sx={{
           fontFamily: "Inconsolata",
           fontWeight: 400,
@@ -93,39 +101,39 @@ export default function Header(props) {
         style={{ boxShadow: "none" }}
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography
-            className={style.logo}
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              fontFamily: "Merienda",
-              fontWeight: 700,
-              letterSpacing: ".1rem",
-              textDecoration: "none",
-              color: theme.palette.primary.main,
-            }}
-          >
-            Slacker
-          </Typography>
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+          <Link to="/">
             <Typography
-              className={style.nav__item}
-              variant="h6"
+              className={style.logo}
+              variant="h5"
               noWrap
-              component="a"
-              href="/about"
               sx={{
-                fontFamily: "Inconsolata",
-                fontWeight: 400,
+                fontFamily: "Merienda",
+                fontWeight: 700,
                 letterSpacing: ".1rem",
                 textDecoration: "none",
                 color: theme.palette.primary.main,
               }}
             >
-              About
+              Slacker
             </Typography>
+          </Link>
+          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+            <Link to="/about">
+              <Typography
+                className={style.nav__item}
+                variant="h6"
+                noWrap
+                sx={{
+                  fontFamily: "Inconsolata",
+                  fontWeight: 400,
+                  letterSpacing: ".1rem",
+                  textDecoration: "none",
+                  color: theme.palette.primary.main,
+                }}
+              >
+                About
+              </Typography>
+            </Link>
           </Box>
           <IconButton
             color="inherit"
