@@ -31,7 +31,23 @@ const About = () => {
             color: theme.palette.primary.light,
           }}
         >
-          About Slacker
+          About
+          <Typography
+            variant="h4"
+            noWrap
+            component="a"
+            href="/about"
+            sx={{
+              fontFamily: "Merienda",
+              fontWeight: 700,
+              letterSpacing: ".1rem",
+              textDecoration: "none",
+              color: theme.palette.primary.light,
+              ml: 2.5,
+            }}
+          >
+            Slacker
+          </Typography>
         </Typography>
         <Grid
           container
@@ -52,7 +68,7 @@ const About = () => {
                 mt: 3,
               }}
             >
-              Slacker（偷薪賊），根據薪資計算方式切換分類，得出每小時、每分鐘、每秒的薪資，再乘以於本站停留的時間以獲得偷取的薪資，此為趣味性的薪資轉換工具。
+              Slacker（偷薪賊），根據薪資計算方式切換分類，輸入薪資得出每小時、每分鐘、每秒的薪資，再乘以於本站停留的時間以獲得偷取的薪資。
             </Typography>
           </Grid>
           <Grid xs={9} sm={6}>
@@ -68,7 +84,7 @@ const About = () => {
                 mt: 3,
               }}
             >
-              未來預計加入更多薪資計算（或轉換）器，讓本站更具實用性。
+              此為趣味性的薪資轉換工具，未來預計加入更多薪資計算（或轉換）器，讓本站更具實用性。
             </Typography>
           </Grid>
         </Grid>

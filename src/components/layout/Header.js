@@ -24,7 +24,6 @@ export default function Header(props) {
 
   const drawer = (
     <Box
-      onClick={handleDrawerToggle}
       sx={{
         textAlign: "center",
         height: "100%",
@@ -140,7 +139,6 @@ export default function Header(props) {
           variant="temporary"
           open={mobileOpen}
           anchor="right"
-          onClose={handleDrawerToggle}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
