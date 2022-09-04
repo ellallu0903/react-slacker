@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-slacker/static/css/main.8d32d757.css",
+    "main.js": "/react-slacker/static/js/main.8cbb794c.js",
+    "index.html": "/react-slacker/index.html",
+    "main.8d32d757.css.map": "/react-slacker/static/css/main.8d32d757.css.map",
+    "main.8cbb794c.js.map": "/react-slacker/static/js/main.8cbb794c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8d32d757.css",
+    "static/js/main.8cbb794c.js"
+  ]
+}
