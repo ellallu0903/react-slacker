@@ -12,8 +12,8 @@ import style from "../sass/salaryCalculator.module.scss";
 
 const SalaryCalculator = () => {
   const [salaryType, setSalaryType] = useState("monthly"); // monthly 月薪, hourly 時薪
-  const [month, setMonth] = useState(22000);
-  const [hour, setHour] = useState(150);
+  const [month, setMonth] = useState(25250);
+  const [hour, setHour] = useState(168);
   const [startTime] = useState(Date.now());
   const [currentTime, setCurrentTime] = useState(Date.now());
   const [validateInput, setValidateInput] = useState(false);
