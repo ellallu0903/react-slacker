@@ -12,11 +12,11 @@ import SalaryCaculator from "./components/SalaryCalculator";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route index element={<SalaryCaculator />} />
-          <Route path="/about" element={<About />} />
+          <Route exact index element={<SalaryCaculator />} />
+          <Route exact path="/about" element={<About />} />
         </Route>
       </Routes>
     </BrowserRouter>
