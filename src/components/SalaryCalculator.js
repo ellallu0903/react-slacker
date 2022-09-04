@@ -132,6 +132,10 @@ const SalaryCalculator = () => {
         alignItems="center"
         sx={{
           height: "100%",
+          pt: {
+            xs: "36px",
+            sm: "0",
+          },
         }}
       >
         <ToggleButtonGroup
