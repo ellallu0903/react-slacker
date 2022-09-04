@@ -10,6 +10,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import { theme } from "../common/commonMuiTheme";
 
+import style from "../../sass/layout.module.scss";
+
 const drawerWidth = "100%";
 
 export default function Header(props) {
@@ -64,6 +66,7 @@ export default function Header(props) {
         Slacker
       </Typography>
       <Typography
+        className={style.nav__item_full}
         variant="h4"
         noWrap
         component="a"
@@ -91,6 +94,7 @@ export default function Header(props) {
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography
+            className={style.logo}
             variant="h5"
             noWrap
             component="a"
@@ -107,6 +111,7 @@ export default function Header(props) {
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             <Typography
+              className={style.nav__item}
               variant="h6"
               noWrap
               component="a"
