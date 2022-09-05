@@ -7,17 +7,17 @@ import style from "../../sass/layout.module.scss";
 
 const Footer = () => {
   return (
-    <Box
-      className={style.footer}
-      sx={{ height: "36px", background: theme.palette.primary.main }}
-    >
-      <Grid
-        container
-        justifyContent="center"
-        alignItems="center"
-        sx={{ height: "100%" }}
+    <footer>
+      <Box
+        className={style.footer}
+        sx={{ height: "36px", background: theme.palette.primary.main }}
       >
-        <footer>
+        <Grid
+          container
+          justifyContent="center"
+          alignItems="center"
+          sx={{ height: "100%" }}
+        >
           <Typography
             variant="div"
             noWrap
@@ -26,13 +26,22 @@ const Footer = () => {
               fontWeight: 400,
               letterSpacing: ".1rem",
               color: "#fff",
+              mr: 1.5,
             }}
           >
             Copyright © 2022 Yi-Zhen Lu
           </Typography>
-        </footer>
-      </Grid>
-    </Box>
+          <iframe
+            src="https://ghbtns.com/github-btn.html?user=ellallu0903&repo=react-slacker&type=star&count=false"
+            frameborder="0"
+            scrolling="0"
+            width="55"
+            height="20"
+            title="GitHub"
+          ></iframe>
+        </Grid>
+      </Box>
+    </footer>
   );
 };
 
