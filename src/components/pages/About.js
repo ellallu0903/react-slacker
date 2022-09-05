@@ -20,9 +20,8 @@ const About = () => {
       >
         <Typography
           variant="h4"
+          component="div"
           noWrap
-          component="a"
-          href="/about"
           sx={{
             fontFamily: "Inconsolata",
             fontWeight: 700,
@@ -34,9 +33,8 @@ const About = () => {
           About
           <Typography
             variant="h4"
+            component="span"
             noWrap
-            component="a"
-            href="/about"
             sx={{
               fontFamily: "Merienda",
               fontWeight: 700,
