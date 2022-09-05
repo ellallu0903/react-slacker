@@ -1,64 +1,77 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  changeSalaryType,
+  changeMonthlySalary,
+  changeHourlySalary,
+  updateCurrentTime,
+} from "../../slice/salaryCalculatorSlice";
+
 import { Box } from "@mui/system";
 import Grid from "@mui/system/Unstable_Grid";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import { InputText, DisplayText } from "./common/Input";
+import { InputText, DisplayText } from "../common/Input";
 import PaidIcon from "@mui/icons-material/Paid";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
-import { theme } from "./common/commonMuiTheme";
+import { theme } from "../common/commonMuiTheme";
 
-import style from "../sass/salaryCalculator.module.scss";
+import style from "../../sass/salaryCalculator.module.scss";
 
 const SalaryCalculator = () => {
-  const [salaryType, setSalaryType] = useState("monthly"); // monthly 月薪, hourly 時薪
-  const [month, setMonth] = useState(25250);
-  const [hour, setHour] = useState(168);
-  const [startTime] = useState(Date.now());
-  const [currentTime, setCurrentTime] = useState(Date.now());
-  const [validateInput, setValidateInput] = useState(false);
+  const salaryCalculatorState = useSelector((state) => state.salaryCalculator);
+  const { salaryType, monthlySalary, hourlySalary, startTime, currentTime } =
+    salaryCalculatorState;
+  const dispatch = useDispatch();
 
+  const [validateInput, setValidateInput] = useState(false);
   const time = Math.round((currentTime - startTime) / 1000); // 取得共過了多少秒
 
   useEffect(() => {
     setInterval(() => {
-      setCurrentTime(Date.now());
+      dispatch(updateCurrentTime(Date.now()));
     }, 100);
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (
-      (salaryType === "monthly" && !month) ||
-      (salaryType === "hourly" && !hour)
+      (salaryType === "monthly" && !monthlySalary) ||
+      (salaryType === "hourly" && !hourlySalary)
     ) {
       return setValidateInput(false);
     } else {
       return setValidateInput(true);
     }
-  }, [salaryType, month, hour]);
+  }, [salaryType, monthlySalary, hourlySalary]);
 
   const handleSalaryType = (_, type) => {
-    setSalaryType(type);
+    dispatch(changeSalaryType(type));
   };
 
   const handleMonth = (e) => {
     const value = e.target.value === "" ? 0 : e.target.value;
-    setMonth(parseInt(value, 10));
+    dispatch(changeMonthlySalary(value));
   };
 
   const handleHour = (e) => {
     const value = e.target.value === "" ? 0 : e.target.value;
-    setHour(parseInt(value, 10));
+    dispatch(changeHourlySalary(value));
   };
 
   const renderSalaryCalculator = (type) => {
     const hourlySalary =
-      salaryType === "monthly" && !month ? "0" : (month / 240).toFixed(2);
+      salaryType === "monthly" && !monthlySalary
+        ? "0"
+        : (monthlySalary / 240).toFixed(2);
 
     if (salaryType === "monthly") {
       return (
         <Grid>
-          <InputText label="月薪" value={month} onChange={handleMonth} />
+          <InputText
+            label="月薪"
+            value={monthlySalary}
+            onChange={handleMonth}
+          />
           <br />
           <DisplayText label="時薪" value={hourlySalary} />
         </Grid>
@@ -66,7 +79,7 @@ const SalaryCalculator = () => {
     } else {
       return (
         <Grid>
-          <InputText label="時薪" value={hour} onChange={handleHour} />
+          <InputText label="時薪" value={hourlySalary} onChange={handleHour} />
         </Grid>
       );
     }
@@ -75,8 +88,8 @@ const SalaryCalculator = () => {
   const renderMinsSalary = () => {
     const salary =
       salaryType === "monthly"
-        ? (month / 240 / 60).toFixed(2)
-        : (hour / 60).toFixed(2);
+        ? (monthlySalary / 240 / 60).toFixed(2)
+        : (hourlySalary / 60).toFixed(2);
 
     return (
       <Grid>
@@ -88,8 +101,8 @@ const SalaryCalculator = () => {
   const renderSecondsSalary = () => {
     const salary =
       salaryType === "monthly"
-        ? (month / 240 / 60 / 60).toFixed(2)
-        : (hour / 60 / 60).toFixed(2);
+        ? (monthlySalary / 240 / 60 / 60).toFixed(2)
+        : (hourlySalary / 60 / 60).toFixed(2);
 
     return (
       <Grid>
@@ -101,8 +114,8 @@ const SalaryCalculator = () => {
   const renderStealMoney = () => {
     const salary =
       salaryType === "monthly"
-        ? ((time * month) / 240 / 60 / 60).toFixed(2)
-        : ((time * hour) / 60 / 60).toFixed(2);
+        ? ((time * monthlySalary) / 240 / 60 / 60).toFixed(2)
+        : ((time * hourlySalary) / 60 / 60).toFixed(2);
 
     return (
       <Grid
