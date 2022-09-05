@@ -28,6 +28,11 @@ export default function Header(props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const toHomePage = () => {
+    navigate("/");
+    handleDrawerToggle();
+  };
+
   const toAboutPage = () => {
     navigate("/about");
     handleDrawerToggle();
@@ -60,9 +65,11 @@ export default function Header(props) {
         <CloseIcon />
       </IconButton>
       <Typography
+        className={style.logo}
         variant="h4"
         noWrap
         component="h4"
+        onClick={toHomePage}
         sx={{
           fontFamily: "Merienda",
           fontWeight: 700,
@@ -70,6 +77,7 @@ export default function Header(props) {
           textDecoration: "none",
           color: theme.palette.primary.main,
           mb: 5,
+          cursor: "pointer",
         }}
       >
         Slacker
