@@ -48,18 +48,18 @@ const SalaryCalculator = () => {
     dispatch(changeSalaryType(type));
   };
 
-  const handleMonth = (e) => {
-    const value = e.target.value === "" ? 0 : e.target.value;
-    dispatch(changeMonthlySalary(value));
-  };
+  const handleSalary = (e, type) => {
+    const value = e.target.value;
+    const regx = /^[0-9]*$/;
 
-  const handleHour = (e) => {
-    const value = e.target.value === "" ? 0 : e.target.value;
-    dispatch(changeHourlySalary(value));
+    if (type === "monthly" && regx.test(value))
+      dispatch(changeMonthlySalary(value));
+    if (type === "hourly" && regx.test(value))
+      dispatch(changeHourlySalary(value));
   };
 
   const renderSalaryCalculator = (type) => {
-    const hourlySalary =
+    const convertSalary =
       salaryType === "monthly" && !monthlySalary
         ? "0"
         : (monthlySalary / 240).toFixed(2);
@@ -70,16 +70,20 @@ const SalaryCalculator = () => {
           <InputText
             label="月薪"
             value={monthlySalary}
-            onChange={handleMonth}
+            onChange={(e) => handleSalary(e, "monthly")}
           />
           <br />
-          <DisplayText label="時薪" value={hourlySalary} />
+          <DisplayText label="時薪" value={convertSalary} />
         </Grid>
       );
     } else {
       return (
         <Grid>
-          <InputText label="時薪" value={hourlySalary} onChange={handleHour} />
+          <InputText
+            label="時薪"
+            value={hourlySalary}
+            onChange={(e) => handleSalary(e, "hourly")}
+          />
         </Grid>
       );
     }

@@ -43,8 +43,6 @@ export const DisplayText = ({ label, value }) => {
       id="standard-start-adornment"
       sx={{ m: 1, mt: { xs: 1, sm: 3 }, width: "25ch" }}
       InputProps={{
-        inputMode: "numeric",
-        pattern: "[0-9]*",
         startAdornment: <InputAdornment position="start">NT$</InputAdornment>,
       }}
       variant="standard"
