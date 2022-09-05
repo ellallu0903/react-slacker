@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/react-slacker/static/css/main.ff062f3d.css",
-    "main.js": "/react-slacker/static/js/main.f9692574.js",
+    "main.js": "/react-slacker/static/js/main.122f4bfe.js",
     "index.html": "/react-slacker/index.html",
     "main.ff062f3d.css.map": "/react-slacker/static/css/main.ff062f3d.css.map",
-    "main.f9692574.js.map": "/react-slacker/static/js/main.f9692574.js.map"
+    "main.122f4bfe.js.map": "/react-slacker/static/js/main.122f4bfe.js.map"
   },
   "entrypoints": [
     "static/css/main.ff062f3d.css",
-    "static/js/main.f9692574.js"
+    "static/js/main.122f4bfe.js"
   ]
 }
