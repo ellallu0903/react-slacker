@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/react-slacker/static/css/main.ff062f3d.css",
-    "main.js": "/react-slacker/static/js/main.122f4bfe.js",
+    "main.css": "/react-slacker/static/css/main.7555dc34.css",
+    "main.js": "/react-slacker/static/js/main.864e88a0.js",
+    "static/media/not_found_404.png": "/react-slacker/static/media/not_found_404.566b82268aa8e2f303ad.png",
     "index.html": "/react-slacker/index.html",
-    "main.ff062f3d.css.map": "/react-slacker/static/css/main.ff062f3d.css.map",
-    "main.122f4bfe.js.map": "/react-slacker/static/js/main.122f4bfe.js.map"
+    "main.7555dc34.css.map": "/react-slacker/static/css/main.7555dc34.css.map",
+    "main.864e88a0.js.map": "/react-slacker/static/js/main.864e88a0.js.map"
   },
   "entrypoints": [
-    "static/css/main.ff062f3d.css",
-    "static/js/main.122f4bfe.js"
+    "static/css/main.7555dc34.css",
+    "static/js/main.864e88a0.js"
   ]
 }
