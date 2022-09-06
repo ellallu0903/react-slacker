@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import App from "./components/App";
 import SalaryCaculator from "./components/pages/SalaryCalculator";
 import About from "./components/pages/About";
+import NotFound from "./components/pages/NotFound";
 
 import "./index.css";
 import "./sass/layout.module.scss";
@@ -20,6 +21,7 @@ root.render(
           <Route path="/" element={<App />}>
             <Route exact index element={<SalaryCaculator />} />
             <Route exact path="/about" element={<About />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>

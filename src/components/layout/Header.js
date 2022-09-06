@@ -83,7 +83,7 @@ export default function Header(props) {
         Slacker
       </Typography>
       <Typography
-        className={style.nav__item_full}
+        className={style.nav__item_rwd}
         variant="h4"
         noWrap
         onClick={toAboutPage}
